@@ -1,0 +1,5 @@
+company_name = "cesar"
+environment  = "lab"
+vpc_cidr     = "10.0.0.0/16"
+profile      = "default"
+region       = "us-east-1"
