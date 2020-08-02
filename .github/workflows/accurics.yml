@@ -24,9 +24,18 @@ jobs:
           repo: https://github.com/cesar-rodriguez/vulnerable-environment/
           url: https://labs.accurics.com
           fail-on-violations: false
+      - name: Archive Accurics Scan Results
+        uses: actions/upload-artifact@v2
+        with:
+          name: accurics-report
+          path: accurics_report.html
+      - name: Download Accurics Scan Results
+        uses: actions/upload-artifact@v2
+        with:
+          name: accurics-report
       - name: Display statistics
         run: '
-            ls;
+            cat accurics_report.html;
             echo "Environment Name           : ${{ steps.accurics.outputs.env-name }}";
             echo "Violation Count            : ${{ steps.accurics.outputs.num-violations }}";
             echo "Resource Count             : ${{ steps.accurics.outputs.num-resources }}";
