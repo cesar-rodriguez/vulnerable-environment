@@ -44,15 +44,18 @@ resource "aws_instance" "web" {
   vpc_security_group_ids = [aws_security_group.web.id]
   subnet_id              = aws_subnet.public[count.index].id
   user_data              = <<EOF
-#! /bin/bash
-sudo apt-get update
-sudo apt-get install -y apache2
-sudo systemctl start apache2
-sudo systemctl enable apache2
-echo "<h1>Provisioned with Terraform</h1>" | sudo tee /var/www/html/index.html
+#!/bin/bash
+yum update -y
+yum install -y httpd
+service httpd start
+echo "Provisioned with Terraform. Secured with Accurics" > /var/www/html/index.html
 EOF
   tags = {
     Name = "${local.prefix.value}-ec2-${count.index}"
   }
 }
 
+output "instances_public_ips" {
+  description = "The public IPs of the EC2 instances"
+  value       = aws_instance.web.*.public_ip
+}

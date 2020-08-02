@@ -6,13 +6,19 @@ resource "aws_security_group" "public_internet" {
 
   # HTTP access from anywhere
   ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
+    from_port = 80
+    to_port   = 80
+    protocol  = "tcp"
     cidr_blocks = [
       "0.0.0.0/0"
       #"10.0.0.0/16"
     ]
+  }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = [var.vpc_cidr]
   }
 }
 
@@ -27,7 +33,7 @@ resource "aws_elb" "public_elb" {
     healthy_threshold   = 2
     unhealthy_threshold = 2
     timeout             = 3
-    target              = "HTTP:80/"
+    target              = "HTTP:80/index.html"
     interval            = 15
   }
 
