@@ -18,7 +18,6 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         with:
           terraform-version: 0.12.26
-          #plan-args: '-var public_key_path=terraform-poc01.pub -var key_name=terraform-poc01'
           env-id: ${{ secrets.ENV_ID }}
           app-id: ${{ secrets.APP_ID }}
           repo: https://github.com/cesar-rodriguez/vulnerable-environment/
@@ -30,4 +29,4 @@ jobs:
           name: accurics-report
           path: accurics_report.html
       - name: Fail If High Findings
-        run: 'cat accurics_report.json | jq ".summary.drift" | grep 0;'
+        run: 'cat accurics_report.json | jq ".summary.high" | grep 0;'
