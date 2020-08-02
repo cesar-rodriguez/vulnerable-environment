@@ -23,9 +23,10 @@ jobs:
           app-id: ${{ secrets.APP_ID }}
           repo: https://github.com/cesar-rodriguez/vulnerable-environment/
           url: https://labs.accurics.com
-          fail-on-violations: true
+          fail-on-violations: false
       - name: Display statistics
         run: '
+            ls;
             echo "Environment Name           : ${{ steps.accurics.outputs.env-name }}";
             echo "Violation Count            : ${{ steps.accurics.outputs.num-violations }}";
             echo "Resource Count             : ${{ steps.accurics.outputs.num-resources }}";
