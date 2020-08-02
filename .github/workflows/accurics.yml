@@ -30,4 +30,4 @@ jobs:
           name: accurics-report
           path: accurics_report.html
       - name: Fail If High Findings
-        run: 'ls; cat accurics_report.json | jq ".summary.high" | grep 0;'
+        run: 'cat accurics_report.json | jq ".summary.drift" | grep 0;'
