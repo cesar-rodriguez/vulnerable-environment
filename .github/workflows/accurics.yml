@@ -29,23 +29,5 @@ jobs:
         with:
           name: accurics-report
           path: accurics_report.html
-      - name: Download Accurics Scan Results
-        uses: actions/upload-artifact@v2
-        with:
-          name: accurics-report
-      - name: Display statistics
-        run: '
-            cat accurics_report.html;
-            echo "Environment Name           : ${{ steps.accurics.outputs.env-name }}";
-            echo "Violation Count            : ${{ steps.accurics.outputs.num-violations }}";
-            echo "Resource Count             : ${{ steps.accurics.outputs.num-resources }}";
-            echo "Native Resources           : ${{ steps.accurics.outputs.native }}";
-            echo "Inherited Resources        : ${{ steps.accurics.outputs.inherited }}";
-            echo "High-Severity Violations   : ${{ steps.accurics.outputs.high }}";
-            echo "Medium-Severity Violations : ${{ steps.accurics.outputs.medium }}";
-            echo "Low-Severity Violations    : ${{ steps.accurics.outputs.low }}";
-            echo "Drift                      : ${{ steps.accurics.outputs.drift }}";
-            echo "IaC Drift                  : ${{ steps.accurics.outputs.iacdrift }}";
-            echo "Cloud Drift                : ${{ steps.accurics.outputs.clouddrift }}";
-            echo ""
-          '
+      - name: Fail If High Findings
+        run: 'ls; cat accurics_report.json | jq '.summary.high' | grep 0;'
