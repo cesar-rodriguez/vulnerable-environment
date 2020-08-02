@@ -1,0 +1,41 @@
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  iac_scan_job:
+    runs-on: ubuntu-latest
+    name: Scan IaC using Accurics
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Scan
+        uses: accurics/accurics-action@v1.0
+        id: accurics
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        with:
+          terraform-version: 0.12.26
+          #plan-args: '-var public_key_path=terraform-poc01.pub -var key_name=terraform-poc01'
+          env-id: ${{ secrets.ENV_ID }}
+          app-id: ${{ secrets.APP_ID }}
+          repo: https://github.com/cesar-rodriguez/vulnerable-environment/
+          url: https://labs.accurics.com
+          fail-on-violations: true
+      - name: Display statistics
+        run: '
+            echo "Environment Name           : ${{ steps.accurics.outputs.env-name }}";
+            echo "Violation Count            : ${{ steps.accurics.outputs.num-violations }}";
+            echo "Resource Count             : ${{ steps.accurics.outputs.num-resources }}";
+            echo "Native Resources           : ${{ steps.accurics.outputs.native }}";
+            echo "Inherited Resources        : ${{ steps.accurics.outputs.inherited }}";
+            echo "High-Severity Violations   : ${{ steps.accurics.outputs.high }}";
+            echo "Medium-Severity Violations : ${{ steps.accurics.outputs.medium }}";
+            echo "Low-Severity Violations    : ${{ steps.accurics.outputs.low }}";
+            echo "Drift                      : ${{ steps.accurics.outputs.drift }}";
+            echo "IaC Drift                  : ${{ steps.accurics.outputs.iacdrift }}";
+            echo "Cloud Drift                : ${{ steps.accurics.outputs.clouddrift }}";
+            echo ""
+          '
