@@ -23,10 +23,10 @@ jobs:
           repo: https://github.com/cesar-rodriguez/vulnerable-environment/
           url: https://labs.accurics.com
           fail-on-violations: false
-      - name: Archive Accurics Scan Results
-        uses: actions/upload-artifact@v2
-        with:
-          name: accurics-report
-          path: accurics_report.html
-      - name: Fail If High Findings
-        run: 'cat accurics_report.json | jq ".summary.high" | grep 0;'
+#      - name: Archive Accurics Scan Results
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: accurics-report
+#          path: accurics_report.html
+#      - name: Fail If High Findings
+#        run: 'cat accurics_report.json | jq ".summary.high" | grep 0;'
