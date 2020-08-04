@@ -6,13 +6,10 @@ resource "aws_security_group" "public_internet" {
 
   # HTTP access from anywhere
   ingress {
-    from_port = 80
-    to_port   = 80
-    protocol  = "tcp"
-    cidr_blocks = [
-      "0.0.0.0/0"
-      #"10.0.0.0/16"
-    ]
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["10.0.0.0/16"]
   }
   egress {
     from_port   = 0
@@ -29,9 +26,9 @@ resource "aws_security_group" "web" {
   vpc_id      = aws_vpc.vpc.id
 
   ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
+    from_port = 80
+    to_port   = 80
+    protocol  = "tcp"
     cidr_blocks = [
       "0.0.0.0/0"
       #"10.0.0.0/16"
