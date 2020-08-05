@@ -11,7 +11,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Scan
-        uses: accurics/accurics-action@v1.0
+        uses: accurics/accurics-action@v1.1
         id: accurics
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -23,10 +23,10 @@ jobs:
           repo: https://github.com/cesar-rodriguez/vulnerable-environment/
           url: https://labs.accurics.com
           fail-on-violations: false
-#      - name: Archive Accurics Scan Results
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: accurics-report
-#          path: accurics_report.html
-#      - name: Fail If High Findings
-#        run: 'cat accurics_report.json | jq ".summary.high" | grep 0;'
+      - name: Archive Accurics Scan Results
+        uses: actions/upload-artifact@v2
+        with:
+          name: accurics-report
+          path: accurics_report.html
+      - name: Fail If High Findings
+        run: 'cat accurics_report.json | jq ".summary.high" | grep 0;'
