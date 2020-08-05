@@ -6,9 +6,9 @@ resource "aws_security_group" "public_internet" {
 
   # HTTP access from anywhere
   ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
+    from_port = 80
+    to_port   = 80
+    protocol  = "tcp"
     cidr_blocks = [
       #"0.0.0.0/0"
       "10.0.0.0/16"
