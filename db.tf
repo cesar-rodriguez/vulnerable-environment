@@ -1,5 +1,5 @@
 resource "aws_db_subnet_group" "db" {
-  name       = "${local.prefix.value}"
+  name       = local.prefix.value
   subnet_ids = aws_subnet.public.*.id
 
   tags = {
