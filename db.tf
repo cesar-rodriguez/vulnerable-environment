@@ -1,36 +1,3 @@
-resource "aws_security_group" "database" {
-  name        = "database"
-  description = "Used for RDS"
-  vpc_id      = aws_vpc.vpc.id
-
-  tags = {
-    Name = "database"
-  }
-
-  # MySQL access
-  ingress {
-    from_port   = 3306
-    to_port     = 3306
-    protocol    = "tcp"
-    cidr_blocks = ["${aws_vpc.vpc.cidr_block}"]
-  }
-
-  ingress {
-    from_port   = 33060
-    to_port     = 33060
-    protocol    = "tcp"
-    cidr_blocks = ["${aws_vpc.vpc.cidr_block}"]
-  }
-
-  # outbound internet access
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
-
 resource "aws_db_subnet_group" "db" {
   name       = "main"
   subnet_ids = aws_subnet.public.*.id
