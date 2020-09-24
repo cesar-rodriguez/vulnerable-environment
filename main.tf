@@ -16,3 +16,11 @@ provider "aws" {
   region  = var.region
   profile = var.profile
 }
+
+terraform {
+  backend "s3" {
+    bucket = "${local.prefix.value}-state-bucket"
+    key    = "vulnerable-environment.tfstate"
+    region = var.region
+  }
+}
