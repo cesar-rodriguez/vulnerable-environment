@@ -19,8 +19,8 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket = "${local.prefix.value}-state-bucket"
+    bucket = "cesar-lab-state-bucket"
     key    = "vulnerable-environment.tfstate"
-    region = var.region
+    region = "us-east-1"
   }
 }
