@@ -1,5 +1,5 @@
 resource "aws_db_subnet_group" "db" {
-  name       = "main"
+  name       = "${local.prefix.value}"
   subnet_ids = aws_subnet.public.*.id
 
   tags = {
@@ -23,6 +23,6 @@ resource "aws_db_instance" "db" {
   iam_database_authentication_enabled = true
   vpc_security_group_ids              = ["${aws_security_group.database.id}"]
   tags = {
-    Name = "database"
+    Name = "${local.prefix.value}-db"
   }
 }

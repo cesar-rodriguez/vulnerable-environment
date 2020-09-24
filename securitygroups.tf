@@ -48,8 +48,8 @@ resource "aws_security_group" "web" {
 }
 
 resource "aws_security_group" "database" {
-  name        = "database"
-  description = "Used for RDS"
+  name        = "${local.prefix.value}-database"
+  description = "Used for ${local.prefix.value} RDS"
   vpc_id      = aws_vpc.vpc.id
 
   tags = {
