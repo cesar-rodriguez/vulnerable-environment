@@ -3,6 +3,7 @@ variable "environment" {}
 variable "vpc_cidr" {}
 variable "profile" {}
 variable "region" {}
+variable "db_password" {}
 
 locals {
   prefix = {
