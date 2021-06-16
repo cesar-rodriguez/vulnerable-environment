@@ -70,14 +70,14 @@ resource "aws_security_group" "database" {
     from_port   = 3306
     to_port     = 3306
     protocol    = "tcp"
-    cidr_blocks = ["${aws_vpc.vpc.cidr_block}"]
+    cidr_blocks = [aws_vpc.vpc.cidr_block]
   }
 
   ingress {
     from_port   = 33060
     to_port     = 33060
     protocol    = "tcp"
-    cidr_blocks = ["${aws_vpc.vpc.cidr_block}"]
+    cidr_blocks = [aws_vpc.vpc.cidr_block]
   }
 
   # outbound internet access

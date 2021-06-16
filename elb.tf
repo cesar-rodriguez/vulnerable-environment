@@ -2,7 +2,7 @@ resource "aws_elb" "public_elb" {
   name = "${local.prefix.value}-public-elb"
 
   subnets         = aws_subnet.public.*.id
-  security_groups = ["${aws_security_group.public_internet.id}"]
+  security_groups = [aws_security_group.public_internet.id]
   instances       = aws_instance.web.*.id
 
   health_check {

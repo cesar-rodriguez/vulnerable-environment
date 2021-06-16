@@ -21,7 +21,7 @@ resource "aws_db_instance" "db" {
   availability_zone                   = aws_subnet.public[0].availability_zone
   skip_final_snapshot                 = true
   iam_database_authentication_enabled = true
-  vpc_security_group_ids              = ["${aws_security_group.database.id}"]
+  vpc_security_group_ids              = [aws_security_group.database.id]
   tags = {
     Name = "${local.prefix.value}-db"
   }
