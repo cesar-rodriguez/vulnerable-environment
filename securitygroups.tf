@@ -11,7 +11,6 @@ resource "aws_security_group" "public_internet" {
     protocol  = "tcp"
     cidr_blocks = [
       "0.0.0.0/0"
-      #"10.0.0.0/16"
     ]
   }
   egress {
@@ -34,7 +33,6 @@ resource "aws_security_group" "web" {
     protocol  = "tcp"
     cidr_blocks = [
       "0.0.0.0/0"
-      #"10.0.0.0/16"
     ]
   }
   ingress {
