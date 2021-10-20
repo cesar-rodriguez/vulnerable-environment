@@ -4,7 +4,7 @@ variable "instances" {}
 variable "elb_name" {}
 
 resource "aws_elb" "public_elb" {
-  name = "${local.prefix.value}-public-elb"
+  name = var.elb_name
 
   subnets         = var.subnets
   security_groups = [var.security_group]
