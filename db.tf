@@ -25,4 +25,5 @@ resource "aws_db_instance" "db" {
   tags = {
     Name = "${local.prefix.value}-db"
   }
+  storage_encrypted = true
 }
