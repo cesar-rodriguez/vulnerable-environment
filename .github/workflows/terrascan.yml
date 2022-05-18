@@ -24,7 +24,7 @@ jobs:
 #        sarif_file: terrascan.sarif
     - name: Comment on PR
       uses: actions/github-script@0.9.0
-      if: github.event_name == 'pull_request'
+      #if: github.event_name == 'pull_request'
       env:
         terrascan_log: "${{ steps.terrascan.outputs.result }}"
         terrascan_err: "${{ steps.terrascan.outputs.err }}"
