@@ -10,7 +10,7 @@ jobs:
     - name: Run Terrascan
       id: terrascan
       #uses: tenable/terrascan-action@main
-      users: robermp/terrascan-action@feature/add_outputs
+      uses: robermp/terrascan-action@feature/add_outputs
       with:
         iac_type: 'terraform'
         iac_version: 'v14'
