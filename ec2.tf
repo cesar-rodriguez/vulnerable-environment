@@ -29,12 +29,16 @@ resource "aws_instance" "web" {
   user_data              = <<EOF
 #!/bin/bash
 yum update -y
-yum install -y httpd
-service httpd start
-echo "Provisioned with Terraform. Secured with Accurics" > /var/www/html/index.html
+#yum install -y httpd
+#service httpd start
+#echo "Provisioned with Terraform. Secured with tenable.cs" > /var/www/html/index.html
+mkdir -p /usr/share/nginx/html/
+echo "Provisioned with Terraform. Secured with tenable.cs" > /usr/share/nginx/html/index.html
+docker run --name some-nginx -v /usr/share/nginx/html:/usr/share/nginx/html:ro -d -p 80:80 nginx:1.21.0
 EOF
   tags = {
     Name = "${local.prefix.value}-ec2-${count.index}"
+    vm-scan = "true"
   }
 }
 
