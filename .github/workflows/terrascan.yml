@@ -9,8 +9,7 @@ jobs:
       uses: actions/checkout@v2
     - name: Run Terrascan
       id: terrascan
-      #uses: tenable/terrascan-action@main
-      users: robermp/terrascan-action@feature/add_outputs
+      uses: tenable/terrascan-action@main
       with:
         iac_type: 'terraform'
         iac_version: 'v14'
